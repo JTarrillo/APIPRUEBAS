@@ -54,7 +54,7 @@ public partial class DbapiContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.Precio).HasColumnType("decimal(10, 2)");
 
-            entity.HasOne(d => d.IdCategoriaNavigation).WithMany(p => p.Productos)
+            entity.HasOne(d => d.oCategoria).WithMany(p => p.Productos)
                 .HasForeignKey(d => d.IdCategoria)
                 .HasConstraintName("FK_IDCATEGORIA");
         });
