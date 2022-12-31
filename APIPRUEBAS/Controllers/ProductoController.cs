@@ -33,8 +33,7 @@ namespace APIPRUEBAS.Controllers
             {
                 lista = _dbcontext.Productos.Include(c => c.oCategoria).ToList();
 
-
-                return StatusCode(StatusCodes.Status200OK, new {mensaje = "ok", response = lista});
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = lista });
             }
             catch (Exception ex)
             {
@@ -43,5 +42,51 @@ namespace APIPRUEBAS.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("Obtener/{idProducto:int}")]
+
+        public IActionResult Obtener(int idProducto)
+        {
+
+            Producto oProducto = _dbcontext.Productos.Find(idProducto);
+            if (oProducto == null)
+            {
+                return BadRequest("Producto no encontrado");
+            }
+
+            try
+            {
+                oProducto = _dbcontext.Productos.Include(c => c.oCategoria).Where(p => p.IdProducto == idProducto).FirstOrDefault();
+
+
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok", response = oProducto });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message, response = oProducto });
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [Route("Guardar")]
+
+        public IActionResult Guardar([FromBody] Producto objeto)
+        {
+
+            _dbcontext.Productos.Add(objeto);
+            _dbcontext.SaveChanges();
+
+           
+            try
+            {
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = "ok" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status200OK, new { mensaje = ex.Message });
+                throw;
+            }
+        }
     }
 }
