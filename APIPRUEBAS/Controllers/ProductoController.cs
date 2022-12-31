@@ -31,7 +31,7 @@ namespace APIPRUEBAS.Controllers
 
             try
             {
-                lista = _dbcontext.Productos.ToList();
+                lista = _dbcontext.Productos.Include(c => c.oCategoria).ToList();
 
 
                 return StatusCode(StatusCodes.Status200OK, new {mensaje = "ok", response = lista});
