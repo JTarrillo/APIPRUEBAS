@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using APIPRUEBAS.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DBAPIContext>(opt =>opt.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
+
+
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 var app = builder.Build();
 
