@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace APIPRUEBAS.Models;
 
-public partial class DbapiContext : DbContext
+public partial class DBAPIContext : DbContext
 {
-    public DbapiContext()
+    public DBAPIContext()
     {
     }
 
-    public DbapiContext(DbContextOptions<DbapiContext> options)
+    public DBAPIContext(DbContextOptions<DBAPIContext> options)
         : base(options)
     {
     }

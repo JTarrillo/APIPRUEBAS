@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<DbapiContext>(opt =>opt.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
+builder.Services.AddDbContext<DBAPIContext>(opt =>opt.UseSqlServer(builder.Configuration.GetConnectionString("cadenaSQL")));
 
 var app = builder.Build();
 
